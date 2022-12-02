@@ -5,14 +5,20 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 
+let img1 = new Image();
+img1.src ='mario.png'
+let img2 = new Image();
+img2.src = 'goomba.png'
+
 let dino = {
   x: 10,
   y: 200,
   width : 50,
   height : 50,
   draw(){
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'white';
     ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.drawImage(img1,this.x,this.y)
   }
 }
 dino.x += 1;
@@ -26,9 +32,11 @@ class Cactus{
     this.height = 50;
   }
   draw(){
-    ctx.fillStyle = 'gray';
+    ctx.fillStyle = 'white';
     ctx.fillRect(this.x,this.y,this.width,this.height);
-    ctx.drawImage()
+    ctx.drawImage(img2,this.x,this.y)
+
+    
   }
 }
 
@@ -40,6 +48,7 @@ let cactusArray =[];
 let jumptimer = 0;
 let jump = false;
 let animation;
+
 
 function frame(){
   animation =  requestAnimationFrame(frame)
@@ -57,7 +66,7 @@ function frame(){
     if(e.x < 0){
       o.splice(i,1)
     }
-    e.x -=2;
+    e.x -=5;
 
     crash(dino,e);
 
@@ -67,16 +76,16 @@ function frame(){
 
 
   if (jump === true){
-    dino.y -=3;
+    dino.y -=6;
     jumptimer ++;
   }
   if ( jump === false){
     if(dino.y < 200){
 
-      dino.y +=3;
+      dino.y +=5;
     }
   }
-  if (jumptimer>50){
+  if (jumptimer>20){
     jump = false;
     jumptimer = 0;
   }
