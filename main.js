@@ -19,6 +19,7 @@ let dino = {
     ctx.fillStyle = 'green';
     ctx.fillRect(this.x,this.y,this.width,this.height);
     ctx.drawImage(img1,this.x,this.y)
+    
   }
 }
 dino.x += 1;
@@ -26,7 +27,7 @@ dino.draw()
 
 class Cactus{
   constructor(){
-    this.x = 500;
+    this.x = 1500;
     this.y = 200;
     this.width = 50;
     this.height = 50;
@@ -69,7 +70,7 @@ function frame(){
     if(e.x < 0){
       o.splice(i,1)
     }
-    e.x -=5;
+    e.x -=2;
 
     crash(dino,e);
 
@@ -85,19 +86,19 @@ function frame(){
   if ( jump === false){
     if(dino.y < 200){
 
-      dino.y +=5;
+      dino.y +=6;
     }
   }
 
-  if (jumptimer>20){
+  if (jumptimer>25){
     jump = false;
     jumptimer = 0;
   }
   
   if (rightmove===true){
-    dino.x +=5;
+    dino.x +=4;
   } else if (leftmove === true){
-    dino.x -=5;
+    dino.x -=4;
   }
   
 }
@@ -109,20 +110,29 @@ frame();
 const crash =(dino,cactus)=>{
   let xCrash = cactus.x - (dino.x+dino.width);
   let yCrash = cactus.y - (dino.y+dino.height);
+  if(xCrash < 0 && yCrash <0 && xCrash > -100){
+    if ( yCrash <= 0 ){
+      ctx.clearRect(0,0,canvas.width,canvas.height)
+    }else{
 
-  if(xCrash < 0 && yCrash < 0){
-    ctx.clearRect(0,0, canvas.width,canvas.height);
-    cancelAnimationFrame(animation)
-    alert("게임오버")
+      ctx.clearRect(0,0, canvas.width,canvas.height);
+      cancelAnimationFrame(animation)
+      alert("게임오버")
+    }
+
   }
+
+
 }
+
+
 
 
 document.addEventListener('keydown',(a)=>{
   if(a.code === 'Space'){
     jump = true;
   }else if(a.code === 'ArrowRight'){
-    rightmove = true;   
+    rightmove = true;
   }else if(a.code === 'ArrowLeft'){
     leftmove = true;
   }
@@ -131,9 +141,9 @@ document.addEventListener('keydown',(a)=>{
 
 document.addEventListener('keyup',(e)=>{
   if(e.code === 'ArrowRight'){
-    rightmove = false;   
+    rightmove = false;
   }
   if(e.code === 'ArrowRight'){
-    leftmove = false;   
+    leftmove = false;
   }
 })
