@@ -16,7 +16,7 @@ let dino = {
   width : 50,
   height : 50,
   draw(){
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'green';
     ctx.fillRect(this.x,this.y,this.width,this.height);
     ctx.drawImage(img1,this.x,this.y)
   }
@@ -32,7 +32,7 @@ class Cactus{
     this.height = 50;
   }
   draw(){
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'red';
     ctx.fillRect(this.x,this.y,this.width,this.height);
     ctx.drawImage(img2,this.x,this.y)
 
@@ -48,6 +48,9 @@ let cactusArray =[];
 let jumptimer = 0;
 let jump = false;
 let animation;
+let rightmove = false;
+let leftmove = false;
+
 
 
 function frame(){
@@ -85,12 +88,17 @@ function frame(){
       dino.y +=5;
     }
   }
+
   if (jumptimer>20){
     jump = false;
     jumptimer = 0;
   }
   
-
+  if (rightmove===true){
+    dino.x +=5;
+  } else if (leftmove === true){
+    dino.x -=5;
+  }
   
 }
 
@@ -113,5 +121,19 @@ const crash =(dino,cactus)=>{
 document.addEventListener('keydown',(a)=>{
   if(a.code === 'Space'){
     jump = true;
+  }else if(a.code === 'ArrowRight'){
+    rightmove = true;   
+  }else if(a.code === 'ArrowLeft'){
+    leftmove = true;
+  }
+  
+})
+
+document.addEventListener('keyup',(e)=>{
+  if(e.code === 'ArrowRight'){
+    rightmove = false;   
+  }
+  if(e.code === 'ArrowRight'){
+    leftmove = false;   
   }
 })
