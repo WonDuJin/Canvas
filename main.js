@@ -20,9 +20,8 @@ let Mario = {
   height : 50,
   draw(){
     ctx.fillStyle = 'green';
-    ctx.fillRect(this.x,this.y,this.width,this.height);
+    ctx.fillRect(this.x,this.y,this.width,this.height);    
     ctx.drawImage(img1,this.x,this.y)
-    
   }
 }
 //x축 이동 
@@ -45,6 +44,7 @@ class Goomba{
     
   }
 }
+// Mario.draw()
 
 let timer = 0;
 let goombaArray =[];
@@ -106,6 +106,7 @@ function frame(){
   if (rightmove===true){
     Mario.x +=4;
   } else if (leftmove === true){
+    
     Mario.x -=4;
   }
   
